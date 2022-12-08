@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 			  { hid: 'og:locale', property: 'og:locale', content: 'en_GB' },
 			  { hid: 'og:type', property: 'og:type', content: 'website' },
 			  { hid: 'og:description', property: 'og:description', content: 'Boilerplate for a nuxt app with SEO features' },
-			  { hid: 'og:url', property: 'og:url', content: process.env.NUXT_PUBLIC_URL },
+			  { hid: 'og:url', property: 'og:url', content: process.env.URL },
 			  { hid: 'og:title', property: 'og:title', content: 'Nuxt3 SEO App' },
 			  { hid: 'og:image', property: 'og:image', content: '/social.png' },
 			  { hid: 'og:image:secure_url', property: 'og:image:secure_url', content: '/social.png' },
@@ -20,7 +20,7 @@ export default defineNuxtConfig({
 			  { hid: 'twitter:image', name: 'twitter:image', content: '/social.png' },
 			],
 			link: [
-			  { hid: 'canonical', rel: 'canonical', href: process.env.NUXT_PUBLIC_URL },
+			  { hid: 'canonical', rel: 'canonical', href: process.env.URL },
 			  { rel: 'icon', type: 'image/png', href: '/favicon.png' },
 			],
 		}
@@ -28,15 +28,21 @@ export default defineNuxtConfig({
 
 	css: [],
 
-	modules: [ '@nuxtjs/sitemap' ],
+	modules: [ '@pinia/nuxt' ],
 
 	buildModules: [],
 
-	// https://sitemap.nuxtjs.org/usage/sitemap
+	// https://github.com/funkenstudio/sitemap-module-nuxt-3/tree/experimental
 	sitemap: {
-    hostname: process.env.NUXT_PUBLIC_URL,
+    hostname: process.env.URL,
     gzip: true,
+    cacheTime: 1,
     exclude: [],
-    routes: []
+    routes: [], // see here for dynamic routes https://github.com/funkenstudio/sitemap-module-nuxt-3/tree/experimental#using-dynamic-routes
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date().toISOString(),
+    },
   },
 })
