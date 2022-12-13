@@ -11,6 +11,7 @@
     "nuxt": "3.0.0-rc.13"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.6"
+    "@pinia/nuxt": "^0.4.6",
+    "axios": "^1.2.1"
   }
 }

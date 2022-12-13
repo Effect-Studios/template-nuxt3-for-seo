@@ -45,4 +45,22 @@ export default defineNuxtConfig({
       lastmod: new Date().toISOString(),
     },
   },
+
+  runtimeConfig: {
+    public: {
+      api: {
+        baseURL: '/',
+        redirectOn401: {
+          path: '/auth/login',
+          replace: true,
+        },
+        authorization: {
+          property: 'auth_token',
+          header: 'Authorization',
+          type: 'Token',
+          cookie: 'token',
+        }
+      }
+    },
+  }
 })
