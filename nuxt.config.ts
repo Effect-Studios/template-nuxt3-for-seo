@@ -1,4 +1,5 @@
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+import sitemap from './sitemap'
+
 export default defineNuxtConfig({
 	app: {
 		head: {
@@ -28,32 +29,35 @@ export default defineNuxtConfig({
 
 	css: [],
 
-	modules: [ '@pinia/nuxt' ],
+	modules: [ 
+		'@pinia/nuxt',
+		['@funken-studio/sitemap-nuxt-3', {
+			path: '/sitemap.xml',
+			hostname: process.env.URL,
+			gzip: true,
+			cacheTime: 1,
+			exclude: [],
+			defaults: {
+				changefreq: 'daily',
+				priority: 1,
+				lastmod: new Date().toISOString(),
+			},
+			// see here for dynamic routes https://github.com/funkenstudio/sitemap-module-nuxt-3/tree/experimental#using-dynamic-routes
+			routes: sitemap,
+		}]
+	],
 
 	buildModules: [],
-
-	// https://github.com/funkenstudio/sitemap-module-nuxt-3/tree/experimental
-	sitemap: {
-    hostname: process.env.URL,
-    gzip: true,
-    cacheTime: 1,
-    exclude: [],
-    routes: [], // see here for dynamic routes https://github.com/funkenstudio/sitemap-module-nuxt-3/tree/experimental#using-dynamic-routes
-    defaults: {
-      changefreq: 'daily',
-      priority: 1,
-      lastmod: new Date().toISOString(),
-    },
-  },
 
   runtimeConfig: {
     public: {
       api: {
-        baseURL: '/',
+        baseURL: process.env.API_BASE_URL,
         redirectOn401: {
           path: '/auth/login',
           replace: true,
         },
+				// These authorization properties allow the api plugin to manage the access, storage, and removal of the user's authentication token when needed.
         authorization: {
           property: 'auth_token',
           header: 'Authorization',
