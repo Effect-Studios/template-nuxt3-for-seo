@@ -1,4 +1,5 @@
 ## Scaffolding
+To initialize your app using this template, enter the command below in your terminal.
 ```shell
 npx nuxi init -t gh:Effect-Studios/template-nuxt3-for-seo
 ```
@@ -6,15 +7,13 @@ npx nuxi init -t gh:Effect-Studios/template-nuxt3-for-seo
 # Guide
 
 ## Plugins
-### API
-```[~/plugins/1.api.js](plugins/1.api.js)```
+### [API](plugins/1.api.js)
 The api plugin is a wrapper around an axios instance that defines error, response and request interceptors. These interceptors are designed to manage the user authorization token based on the options defined in the ```runtimeConfig.public.api``` property of the nuxt configuration file, and unwrap error and request responses. <br>
-The module created by this plugin can be accessed from ```useNuxtApp().$api``
+The module created by this plugin can be accessed from ```useNuxtApp().$api```
 
-### Store (Pinia State Management)
-```[~/plugins/store.js](plugins/store.js)```
-This plugin creates a Pinia ```$store``` module for global state management using files available in the **stores** directory of the app. This plugin uses the function approach to define it's stores. <br>
-##### Example
+### [Store (Pinia State Management)](plugins/store.js)
+This plugin creates a Pinia ```$store``` module for global state management using files available in the **stores** directory of the app. The plugin relies on funtional definitions of it's stores. <br>
+#### Example
 See [~/stores/app.js](stores/app.js) for reference
 ```javascript
 export default function() {
